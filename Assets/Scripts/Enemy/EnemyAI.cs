@@ -125,13 +125,12 @@ public class EnemyAI : MonoBehaviour
 
     private void Attack()
     {
-        agent.SetDestination(transform.position);
-
         if (Time.time < nextAttackTime)
         {
             return;
         }
 
+        agent.SetDestination(transform.position);
         nextAttackTime = Time.time + attackCooldown;
         Debug.Log($"Player is attacked for {damage} damage.");
         playerHealth.TakeDamage(damage);
