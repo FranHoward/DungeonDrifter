@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    [SerializeField] private float damage;
     [SerializeField] private float range = 1.5f;
     [SerializeField] private LayerMask enemyLayer;
 
@@ -18,6 +19,8 @@ public class Attack : MonoBehaviour
         foreach(var hit in hits)
         {
             Debug.Log($"命中: {hit.name}");
+            if (hit.TryGetComponent<Health>(out var health))
+                health.TakeDamage(damage);
             if (hit.TryGetComponent<Renderer>(out var r))
                 r.material.color = Color.red;
         }

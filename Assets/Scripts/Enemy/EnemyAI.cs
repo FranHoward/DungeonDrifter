@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float chaseRange = 8f;
     [SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private float patrolDistancce = 1.0f;
+    [SerializeField] private float patrolDistance = 1.0f;
     [SerializeField] private float patrolPointSpread = 1.5f;
 
     private static int nextPatrolSlot;
@@ -18,6 +18,11 @@ public class EnemyAI : MonoBehaviour
     private int currentIndex;
     private bool patrolDestinationSet;
     private Vector3 patrolOffset;
+
+    [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private float damage = 10f;
+    private Health playerHealth;
+    private float nextAttackTime;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetPatrolSlots()
@@ -44,11 +49,18 @@ public class EnemyAI : MonoBehaviour
         if (playerObject != null)
         {
             player = playerObject.transform;
+            playerHealth = playerObject.GetComponent<Health>();
         }
     }
 
     private void Update()
     {
+        if (player == null || playerHealth == null || playerHealth.IsDead)
+        {
+            agent.SetDestination(transform.position);
+            return;
+        }
+
         float dist = Vector3.Distance(transform.position, player.position);
         state = dist <= attackRange ? State.Attack
             : dist <= chaseRange ? State.Chase
@@ -62,7 +74,7 @@ public class EnemyAI : MonoBehaviour
         switch (state)
         {
             case State.Chase: agent.SetDestination(player.position); break;
-            case State.Attack: agent.SetDestination(transform.position); break;
+            case State.Attack: Attack(); break;
             case State.Patrol: UpdatePatrol(); break;
         }
     }
@@ -80,7 +92,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if (!agent.pathPending && agent.remainingDistance <= patrolDistancce)
+        if (!agent.pathPending && agent.remainingDistance <= patrolDistance)
         {
             currentIndex = (currentIndex + 1) % points.Length;
             SetCurrentPatrolDestination();
@@ -109,5 +121,19 @@ public class EnemyAI : MonoBehaviour
 
         agent.SetDestination(destination);
         patrolDestinationSet = true;
+    }
+
+    private void Attack()
+    {
+        agent.SetDestination(transform.position);
+
+        if (Time.time < nextAttackTime)
+        {
+            return;
+        }
+
+        nextAttackTime = Time.time + attackCooldown;
+        Debug.Log($"Player is attacked for {damage} damage.");
+        playerHealth.TakeDamage(damage);
     }
 }

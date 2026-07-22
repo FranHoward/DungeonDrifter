@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7643068052722953770}
   - component: {fileID: 8336646196977052005}
   - component: {fileID: 96734550702527477}
+  - component: {fileID: 4713009517579733511}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Untagged
@@ -171,4 +172,17 @@ MonoBehaviour:
   player: {fileID: 7791122291073831987, guid: 1cc458f8e1aa53f489376a7c8d24a123, type: 3}
   chaseRange: 8
   attackRange: 1.5
-  patrolDistancce: 1.5
+  patrolDistance: 1
+  patrolPointSpread: 1.5
+--- !u!114 &4713009517579733511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010071289117181149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd79907c924633847be16fe6b317c2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
