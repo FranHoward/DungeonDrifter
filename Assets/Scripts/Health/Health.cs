@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
     private float current;
 
     public bool IsDead => current <= 0f;
+    public float CurrentHealth => current;
+    public float MaxHealth => maxHealth;
 
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
