@@ -55,6 +55,9 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (!agent.isOnNavMesh)
+            return;
+
         if (player == null || playerHealth == null || playerHealth.IsDead)
         {
             agent.SetDestination(transform.position);
