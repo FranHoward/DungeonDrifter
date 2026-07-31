@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e0bc712b19bc84284605f121300df3, type: 3}
+  m_Name: DefaultDropTable
+  m_EditorClassIdentifier: Assembly-CSharp::DropTable
+  entries:
+  - type: 1
+    prefab: {fileID: 502471833661085933, guid: 51512002c121beb46a10aadb0d8ecb92, type: 3}
+    weight: 50
+    amount: 1
+    weapon: {fileID: 0}
+  - type: 2
+    prefab: {fileID: 4901512189653892744, guid: bf839b6b9e1b10d47b52d17426feb086, type: 3}
+    weight: 35
+    amount: 25
+    weapon: {fileID: 0}
+  - type: 3
+    prefab: {fileID: 4816935036370700092, guid: a09831dcf55ee864f9f3457f3f2be8cd, type: 3}
+    weight: 15
+    amount: 1
+    weapon: {fileID: 11400000, guid: 02a5144dbd6876d4ea90e39a2c85d196, type: 2}
+  noDropWeight: 0

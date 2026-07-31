@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 8336646196977052005}
   - component: {fileID: 96734550702527477}
   - component: {fileID: 4713009517579733511}
+  - component: {fileID: 3043384948519661314}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Untagged
@@ -265,6 +266,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
+--- !u!114 &3043384948519661314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010071289117181149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d19da5a56083184984ed4bdd445c8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDrop
+  dropTable: {fileID: 11400000, guid: dff90f09553464f4bb9b39f484388704, type: 2}
 --- !u!1 &2383320938826777569
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,18 +5,45 @@ public class WeaponAttack : MonoBehaviour
     [SerializeField] private WeaponData weapon;
     [SerializeField] private LayerMask enemyLayer;
     private float lastAttackTime;
+    private PlayerStats stats;
+
+    public WeaponData CurrentWeapon => weapon;
+
+    private void Awake()
+    {
+        stats = GetComponent<PlayerStats>();
+    }
+
+    public void Equip(WeaponData newWeapon)
+    {
+        if (newWeapon == null)
+            return;
+
+        weapon = newWeapon;
+        Debug.Log($"Equipped {weapon.weaponName}.");
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastAttackTime + weapon.cooldown)
+        float cooldownMultiplier = stats != null ? stats.CooldownMultiplier : 1f;
+        float finalCooldown = weapon != null ? weapon.cooldown * cooldownMultiplier : 0f;
+
+        if (weapon != null
+            && Input.GetKeyDown(KeyCode.Space)
+            && Time.time >= lastAttackTime + finalCooldown)
         {
             lastAttackTime = Time.time;
-            var center = transform.position + transform.forward * weapon.range * 0.5f;
-            foreach (var hit in Physics.OverlapSphere(center, weapon.range, enemyLayer))
+            float damageMultiplier = stats != null ? stats.DamageMultiplier : 1f;
+            float rangeMultiplier = stats != null ? stats.RangeMultiplier : 1f;
+            float finalDamage = weapon.damage * damageMultiplier;
+            float finalRange = weapon.range * rangeMultiplier;
+            var center = transform.position + transform.forward * finalRange * 0.5f;
+
+            foreach (var hit in Physics.OverlapSphere(center, finalRange, enemyLayer))
             {
-                Debug.Log($"{weapon.weaponName} 造成 {weapon.damage} 伤害给 {hit.name}");
+                Debug.Log($"{weapon.weaponName} deals {finalDamage:0.##} damage to {hit.name}");
                 if (hit.TryGetComponent<Health>(out var health))
-                    health.TakeDamage(weapon.damage);
+                    health.TakeDamage(finalDamage);
             }
         }
     }
