@@ -25,7 +25,17 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - type: 3
     prefab: {fileID: 4816935036370700092, guid: a09831dcf55ee864f9f3457f3f2be8cd, type: 3}
-    weight: 15
+    weight: 6.75
     amount: 1
     weapon: {fileID: 11400000, guid: 02a5144dbd6876d4ea90e39a2c85d196, type: 2}
+  - type: 3
+    prefab: {fileID: 4816935036370700092, guid: a09831dcf55ee864f9f3457f3f2be8cd, type: 3}
+    weight: 6
+    amount: 1
+    weapon: {fileID: 11400000, guid: 449c786a261454d4bb564db437522271, type: 2}
+  - type: 3
+    prefab: {fileID: 4816935036370700092, guid: a09831dcf55ee864f9f3457f3f2be8cd, type: 3}
+    weight: 2.25
+    amount: 1
+    weapon: {fileID: 11400000, guid: 429aab5ccdc1a7c448b48e0e8a2c37b3, type: 2}
   noDropWeight: 0

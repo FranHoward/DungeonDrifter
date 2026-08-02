@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Health))]
 public class EnemyAI : MonoBehaviour
 {
     private enum State { Patrol, Chase, Attack }
@@ -21,6 +22,7 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float damage = 10f;
+    private Health health;
     private Health playerHealth;
     private float nextAttackTime;
 
@@ -33,6 +35,7 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        health = GetComponent<Health>();
 
         if (points != null && points.Length > 0)
         {
@@ -51,6 +54,20 @@ public class EnemyAI : MonoBehaviour
             player = playerObject.transform;
             playerHealth = playerObject.GetComponent<Health>();
         }
+    }
+
+    public void Configure(EnemyData data)
+    {
+        if (data == null)
+            return;
+
+        gameObject.name = data.enemyName;
+        attackRange = data.attackRange;
+        attackCooldown = data.attackCooldown;
+        damage = data.damage;
+        agent.speed = data.moveSpeed;
+        health.SetMaxHealth(data.maxHealth);
+        nextAttackTime = 0f;
     }
 
     private void Update()

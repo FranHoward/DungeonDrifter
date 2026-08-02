@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Bow
-  damage: 8
+  damage: 14
   range: 3
-  coolDown: 0.5
+  cooldown: 0.65

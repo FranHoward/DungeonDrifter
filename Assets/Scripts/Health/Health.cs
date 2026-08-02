@@ -11,22 +11,42 @@ public class Health : MonoBehaviour
     public float MaxHealth => maxHealth;
 
     public event Action<float, float> OnHealthChanged;
+    public event Action<float> OnDamaged;
+    public event Action<float> OnHealed;
     public event Action OnDeath;
 
     private void Awake() => current = maxHealth;
 
+    public void SetMaxHealth(float value, bool refill = true)
+    {
+        maxHealth = Mathf.Max(1f, value);
+        current = refill ? maxHealth : Mathf.Min(current, maxHealth);
+        OnHealthChanged?.Invoke(current, maxHealth);
+    }
+
     public void TakeDamage(float amount)
     {
-        if (current <= 0) return;
+        if (current <= 0 || amount <= 0) return;
+
+        float previous = current;
         current = Mathf.Max(0, current - amount);
         OnHealthChanged?.Invoke(current, maxHealth);
+        OnDamaged?.Invoke(previous - current);
+
         if (current <= 0) Die();
     }
 
     public void Heal(float amount)
     {
+        if (amount <= 0) return;
+
+        float previous = current;
         current = Mathf.Min(maxHealth, current + amount);
         OnHealthChanged?.Invoke(current, maxHealth);
+
+        float healedAmount = current - previous;
+        if (healedAmount > 0)
+            OnHealed?.Invoke(healedAmount);
     }
 
     public void Die()

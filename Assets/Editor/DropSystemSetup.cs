@@ -39,8 +39,11 @@ public static class DropSystemSetup
             AssetDatabase.CreateAsset(dropTable, DropTablePath);
         }
 
-        WeaponData weapon = AssetDatabase.LoadAssetAtPath<WeaponData>("Assets/Data/Sword.asset");
-        ConfigureDropTable(dropTable, coinPrefab, healthPrefab, weaponPrefab, weapon);
+        WeaponData sword = AssetDatabase.LoadAssetAtPath<WeaponData>("Assets/Data/Sword.asset");
+        WeaponData bow = AssetDatabase.LoadAssetAtPath<WeaponData>("Assets/Data/Bow.asset");
+        WeaponData hammer = AssetDatabase.LoadAssetAtPath<WeaponData>("Assets/Data/Hammer.asset");
+        ConfigureDropTable(
+            dropTable, coinPrefab, healthPrefab, weaponPrefab, sword, bow, hammer);
         ConfigurePlayerPrefab();
         ConfigureEnemyPrefab(dropTable);
 
@@ -92,15 +95,19 @@ public static class DropSystemSetup
         GameObject coin,
         GameObject health,
         GameObject weaponPrefab,
-        WeaponData weapon)
+        WeaponData sword,
+        WeaponData bow,
+        WeaponData hammer)
     {
         var serializedTable = new SerializedObject(table);
         SerializedProperty entries = serializedTable.FindProperty("entries");
-        entries.arraySize = 3;
+        entries.arraySize = 5;
 
         SetEntry(entries.GetArrayElementAtIndex(0), DropType.Coin, coin, 50f, 1f, null);
         SetEntry(entries.GetArrayElementAtIndex(1), DropType.Health, health, 35f, 25f, null);
-        SetEntry(entries.GetArrayElementAtIndex(2), DropType.Weapon, weaponPrefab, 15f, 1f, weapon);
+        SetEntry(entries.GetArrayElementAtIndex(2), DropType.Weapon, weaponPrefab, 6.75f, 1f, sword);
+        SetEntry(entries.GetArrayElementAtIndex(3), DropType.Weapon, weaponPrefab, 6f, 1f, bow);
+        SetEntry(entries.GetArrayElementAtIndex(4), DropType.Weapon, weaponPrefab, 2.25f, 1f, hammer);
         serializedTable.FindProperty("noDropWeight").floatValue = 0f;
         serializedTable.ApplyModifiedPropertiesWithoutUndo();
         EditorUtility.SetDirty(table);

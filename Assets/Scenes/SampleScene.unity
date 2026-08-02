@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -272,6 +273,18 @@ MonoBehaviour:
   target: {fileID: 1629418418}
   offset: {x: 0, y: 2, z: -8}
   smooth: 5
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef7241559de8d24a911f912a592e12b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenShake
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +521,12 @@ MonoBehaviour:
   roomPrefabs:
   - {fileID: 910000000000000001, guid: d9b0e1e03289f74429f87687e872a286, type: 3}
   - {fileID: 920000000000000001, guid: 4ed9d884227884a41aa5516c14fe6545, type: 3}
-  enemyPrefabs: {fileID: 2010071289117181149, guid: f1f01cf6cd67d76428afefeff8fea38f, type: 3}
+  enemyPrefab: {fileID: 2010071289117181149, guid: f1f01cf6cd67d76428afefeff8fea38f, type: 3}
+  scout: {fileID: 11400000, guid: 91c4e8f6a2d74b50ad31970c5e8426bf, type: 2}
+  raider: {fileID: 11400000, guid: 0fe36b915a4c478d82b706e5d19a3cf4, type: 2}
+  soldier: {fileID: 11400000, guid: 4b78d1f0c6e24935a8137d9e50bc246f, type: 2}
+  brute: {fileID: 11400000, guid: e2951c7a40bd4f89a6320e5d71c9483b, type: 2}
+  elite: {fileID: 11400000, guid: 7ad30f2b658c41e9bf84d196a35c702e, type: 2}
   roomCount: 5
 --- !u!4 &513757668
 Transform:
