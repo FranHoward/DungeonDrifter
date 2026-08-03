@@ -2,19 +2,18 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class RoomGenerator : MonoBehaviour
 {
     [SerializeField] private Room[] roomPrefabs;
-    [FormerlySerializedAs("enemyPrefabs")]
-    [SerializeField] private GameObject enemyPrefab;
-    [Header("Enemy balance profiles")]
-    [SerializeField] private EnemyData scout;
-    [SerializeField] private EnemyData raider;
-    [SerializeField] private EnemyData soldier;
-    [SerializeField] private EnemyData brute;
-    [SerializeField] private EnemyData elite;
+
+    [Header("Enemy Prefabs")]
+    [SerializeField] private GameObject scoutPrefab;
+    [SerializeField] private GameObject raiderPrefab;
+    [SerializeField] private GameObject soldierPrefab;
+    [SerializeField] private GameObject brutePrefab;
+    [SerializeField] private GameObject elitePrefab;
+
     [SerializeField] private int roomCount = 5;
     [SerializeField] private float playerHeightAboveGround = 1f;
     [SerializeField] private NavMeshSurface navMeshSurface;
@@ -104,15 +103,13 @@ public class RoomGenerator : MonoBehaviour
                 continue;
             }
 
-            GameObject enemy = Instantiate(
-                enemyPrefab, hit.position, Quaternion.identity, room.transform);
-
-            if (enemy.TryGetComponent(out EnemyAI enemyAI))
-                enemyAI.Configure(ChooseEnemyProfile(roomIndex, e, enemyNum));
+            GameObject enemyPrefab = ChooseEnemyPrefab(roomIndex, e, enemyNum);
+            if (enemyPrefab != null)
+                Instantiate(enemyPrefab, hit.position, Quaternion.identity, room.transform);
         }
     }
 
-    private EnemyData ChooseEnemyProfile(
+    private GameObject ChooseEnemyPrefab(
         int roomIndex,
         int enemyIndex,
         int enemyCount)
@@ -122,23 +119,23 @@ public class RoomGenerator : MonoBehaviour
         if (isFinalRoom)
         {
             if (enemyIndex == 0)
-                return elite;
+                return elitePrefab;
 
             // The final room has one Elite, at most one Brute, then Soldiers.
-            return enemyIndex == 1 && enemyCount > 1 ? brute : soldier;
+            return enemyIndex == 1 && enemyCount > 1 ? brutePrefab : soldierPrefab;
         }
 
         switch (roomIndex)
         {
             case 0:
-                return scout;
+                return scoutPrefab;
             case 1:
-                return Random.value < 0.5f ? scout : raider;
+                return Random.value < 0.5f ? scoutPrefab : raiderPrefab;
             case 2:
-                return Random.value < 0.5f ? raider : soldier;
+                return Random.value < 0.5f ? raiderPrefab : soldierPrefab;
             default:
                 // Room four has no more than one Brute.
-                return enemyIndex == 0 ? brute : soldier;
+                return enemyIndex == 0 ? brutePrefab : soldierPrefab;
         }
     }
 

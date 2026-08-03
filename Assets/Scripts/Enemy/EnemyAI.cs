@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,6 +7,10 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     private enum State { Patrol, Chase, Attack }
+    [Header("Profile")]
+    [SerializeField] private EnemyData profile;
+
+    [Header("Navigation")]
     [SerializeField] private Transform[] points;
     [SerializeField] private Transform player;
     [SerializeField] private float chaseRange = 8f;
@@ -26,6 +31,8 @@ public class EnemyAI : MonoBehaviour
     private Health playerHealth;
     private float nextAttackTime;
 
+    public event Action OnAttack;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetPatrolSlots()
     {
@@ -36,6 +43,9 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         health = GetComponent<Health>();
+
+        if (profile != null)
+            Configure(profile);
 
         if (points != null && points.Length > 0)
         {
@@ -61,6 +71,7 @@ public class EnemyAI : MonoBehaviour
         if (data == null)
             return;
 
+        profile = data;
         gameObject.name = data.enemyName;
         attackRange = data.attackRange;
         attackCooldown = data.attackCooldown;
@@ -153,6 +164,7 @@ public class EnemyAI : MonoBehaviour
         agent.SetDestination(transform.position);
         nextAttackTime = Time.time + attackCooldown;
         Debug.Log($"Player is attacked for {damage} damage.");
+        OnAttack?.Invoke();
         playerHealth.TakeDamage(damage);
     }
 }
