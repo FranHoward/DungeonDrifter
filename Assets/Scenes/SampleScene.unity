@@ -521,13 +521,14 @@ MonoBehaviour:
   roomPrefabs:
   - {fileID: 910000000000000001, guid: d9b0e1e03289f74429f87687e872a286, type: 3}
   - {fileID: 920000000000000001, guid: 4ed9d884227884a41aa5516c14fe6545, type: 3}
-  enemyPrefab: {fileID: 2010071289117181149, guid: f1f01cf6cd67d76428afefeff8fea38f, type: 3}
-  scout: {fileID: 11400000, guid: 91c4e8f6a2d74b50ad31970c5e8426bf, type: 2}
-  raider: {fileID: 11400000, guid: 0fe36b915a4c478d82b706e5d19a3cf4, type: 2}
-  soldier: {fileID: 11400000, guid: 4b78d1f0c6e24935a8137d9e50bc246f, type: 2}
-  brute: {fileID: 11400000, guid: e2951c7a40bd4f89a6320e5d71c9483b, type: 2}
-  elite: {fileID: 11400000, guid: 7ad30f2b658c41e9bf84d196a35c702e, type: 2}
+  scoutPrefab: {fileID: 2010071289117181149, guid: ec328f7128c533d42ba87e2cf84e1908, type: 3}
+  raiderPrefab: {fileID: 2010071289117181149, guid: c4a1f72b7fe6e704fb0bc7abe2135dd1, type: 3}
+  soldierPrefab: {fileID: 2010071289117181149, guid: 9a409b8517d1ce94b86bb8b1a5e823d4, type: 3}
+  brutePrefab: {fileID: 2010071289117181149, guid: d1fe342a5f2242b48bea3eac22ed9935, type: 3}
+  elitePrefab: {fileID: 2010071289117181149, guid: bee39bad8f9a14c41b07ca0deb118ea8, type: 3}
   roomCount: 5
+  playerHeightAboveGround: 1
+  navMeshSurface: {fileID: 0}
 --- !u!4 &513757668
 Transform:
   m_ObjectHideFlags: 0
