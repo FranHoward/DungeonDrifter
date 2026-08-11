@@ -4,7 +4,38 @@
 
 ## 截图
 
+<p align="center">
+  <img src="docs/screenshots/dungeon-exploration.png" alt="玩家探索程序化生成的地牢" width="100%">
+  <br>
+  <sub>探索程序化生成的地牢</sub>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/combat.png" alt="玩家与敌人战斗">
+      <br><sub>战斗与敌人</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/loot-drops.png" alt="金币、治疗和武器掉落物">
+      <br><sub>金币、治疗与武器掉落</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/upgrade-selection.png" alt="三选一升级界面">
+      <br><sub>三选一升级</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/screenshots/game-over.png" alt="玩家死亡与重新开始界面">
+      <br><sub>死亡与重新开始</sub>
+    </td>
+  </tr>
+</table>
+
 ## 下载
+
+下载链接：https://github.com/FranHoward/DungeonDrifter/releases/tag/v0.1.0
 
 ## 核心特性
 
